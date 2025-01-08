@@ -10,6 +10,7 @@ public class LightScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        Actions.OnLightEvent += LightSwitch;
         isLightOn = true;
     }
 
@@ -21,12 +22,12 @@ public class LightScript : MonoBehaviour
 
     private void OnEnable()
     {
-        Actions.OnLightEvent += LightSwitch;
+
     }
 
     private void OnDisable()
     {
-        Actions.OnLightEvent += LightSwitch;
+        Actions.OnLightEvent -= LightSwitch;
     }
 
     public void LightSwitch()
