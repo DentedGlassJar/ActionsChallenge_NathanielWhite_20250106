@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
+    // A bool that checks and see if the ball gameobject has changed position or not
     private bool isBallPositionChanged;
 
+    // Start is called before the first frame update
     private void Start()
     {
         isBallPositionChanged = false;
     }
 
+    // Update is called once per frame
     private void Update()
     {
         BallTransform();
@@ -28,17 +31,17 @@ public class BallScript : MonoBehaviour
 
     public void BallTransform()
     {
-        if(Input.GetKey(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (isBallPositionChanged == false)
             {
-                transform.position = new Vector3(0, 5, -10);
                 isBallPositionChanged = true;
+                transform.position = new Vector3(0, 5, -10);
             }
             else
             {
-                transform.position = new Vector3(0, 0.5f, -10);
                 isBallPositionChanged = false;
+                transform.position = new Vector3(0, 0.5f, -10);
             }
         }
     }
