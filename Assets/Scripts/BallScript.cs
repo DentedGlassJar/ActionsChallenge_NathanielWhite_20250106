@@ -10,39 +10,41 @@ public class BallScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Sets the isBallPositionChanged bool to false
         isBallPositionChanged = false;
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        BallTransform();
-    }
-
+    // OnEnable is called when a object is enabled
     private void OnEnable()
     {
-        Actions.OnBallEvent += BallTransform;  
+        Actions.OnBallEvent += BallTransform;
     }
 
+    // OnDisable is called when a behaviour is disabled
     private void OnDisable()
     {
         Actions.OnBallEvent -= BallTransform;
     }
 
+    // Method that is for changing the position of the ball gameobject
     public void BallTransform()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
+        // Checks to see if the ball position has changed
             if (isBallPositionChanged == false)
             {
+                // Sets the isBallPositionChanged bool to true    
                 isBallPositionChanged = true;
+
+                // Changes the ball's position
                 transform.position = new Vector3(0, 5, -10);
             }
             else
             {
+                // Sets the isBallPositionChanged bool to false
                 isBallPositionChanged = false;
+
+                // Resets the ball's position
                 transform.position = new Vector3(0, 0.5f, -10);
             }
-        }
     }
 }

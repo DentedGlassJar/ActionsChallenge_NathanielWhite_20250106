@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CapsuleScript : MonoBehaviour
 {
-    // A bool that checks and see if the ball gameobject has changed position or not
+    // A bool that checks and see if the capsule gameobject has changed scale or not
     private bool isCapsuleScaleChanged;
 
     // Start is called before the first frame update
@@ -13,34 +13,37 @@ public class CapsuleScript : MonoBehaviour
         isCapsuleScaleChanged = false;
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        CapsuleTransform();
-    }
-
+    // OnEnable is called when a object is enabled
     private void OnEnable()
     {
         Actions.OnBallEvent += CapsuleTransform;
     }
 
+    // OnDisable is called when a behaviour is disabled
     private void OnDisable()
     {
         Actions.OnBallEvent -= CapsuleTransform;
     }
 
+    // Method that is for changing the scale of the capsule gameobject
     public void CapsuleTransform()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        // Checks to see if the ball position has changed
+        if (isCapsuleScaleChanged == false)
         {
-            if (isCapsuleScaleChanged == false)
-            {
-                isCapsuleScaleChanged = true;
-            }
-            else
-            {
-                isCapsuleScaleChanged = false;
-            }
+            // Changes the capsule's scale
+            gameObject.transform.localScale = new Vector3(3, 3, 3);
+
+            // Sets the isBallPositionChanged bool to true
+            isCapsuleScaleChanged = true;
+        }
+        else
+        {
+            // Resets the capsule's scale
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+
+            // Sets the isCapsuleScaleChanged bool to false
+            isCapsuleScaleChanged = false;
         }
     }
 }
